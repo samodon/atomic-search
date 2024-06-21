@@ -92,7 +92,6 @@ func main() {
 
 	uniquewords := (tokenize(documents))
 	invertedindex := createindex(uniquewords, documents)
-	// fmt.Print(invertedindex)
 
 	fmt.Print("Enter search term:")
 	input, _ := reader.ReadString('\n')

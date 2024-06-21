@@ -1,1 +1,13 @@
 junior gong
+diff --git a/search.go b/search.go
+index 1d396f4..36df9e4 100644
+--- a/search.go
++++ b/search.go
+@@ -92,7 +92,6 @@ func main() {
+ 
+ 	uniquewords := (tokenize(documents))
+ 	invertedindex := createindex(uniquewords, documents)
+-	// fmt.Print(invertedindex)
+ 
+ 	fmt.Print("Enter search term:")
+ 	input, _ := reader.ReadString('\n')
