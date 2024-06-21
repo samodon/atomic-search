@@ -5,12 +5,18 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
+
+	"github.com/kljensen/snowball"
 )
 
 type document struct {
 	documentloc string
 	content     string
+}
+
+func test(doc document) {
 }
 
 func getdocuments(dirname string) []document {
@@ -37,6 +43,8 @@ func getdocuments(dirname string) []document {
 	return documents
 }
 
+// TODO
+// modify this to return date, tags, topic, etc
 // look into processing this in chunks for improved efficiency
 func readfile(path string) (string, error) {
 	content, err := os.ReadFile(path)
@@ -55,20 +63,22 @@ func contains(slice []string, item string) bool {
 	return false
 }
 
-// this implementation requires the  content first
-// this should return a unique list of words
+// TODO
+// Sort the words in alphabetical order
+// only return the root words
 func tokenize(documents []document) []string {
 	var checkedwords []string
 	var uniquewords []string
 	for _, document := range documents {
 		words := strings.Fields(document.content)
 		for _, word := range words {
-			if !contains(uniquewords, word) {
+			if !contains(checkedwords, word) {
 				uniquewords = append(uniquewords, word)
 				checkedwords = append(checkedwords, word)
 			}
 		}
 	}
+	sort.Strings(uniquewords)
 	return uniquewords
 }
 
@@ -77,11 +87,17 @@ func createindex(words []string, documents []document) map[string][]string {
 	for _, word := range words {
 		for _, document := range documents {
 			if contains(strings.Fields(document.content), word) {
-				invertedindex[word] = append(invertedindex[word], document.documentloc)
+				stemmed, _ := snowball.Stem(word, "english", true)
+				invertedindex[stemmed] = append(invertedindex[stemmed], document.documentloc)
 			}
 		}
 	}
 	return invertedindex
+}
+
+func getresults(words []string) []document {
+	words = append(words, "test")
+	return nil
 }
 
 func main() {
@@ -92,9 +108,12 @@ func main() {
 
 	uniquewords := (tokenize(documents))
 	invertedindex := createindex(uniquewords, documents)
+	// fmt.Println(invertedindex)
 
 	fmt.Print("Enter search term:")
 	input, _ := reader.ReadString('\n')
+	input, _ = snowball.Stem(input, "english", true)
 	input = strings.TrimSpace(input)
+	print(input)
 	fmt.Println(invertedindex[input])
 }
