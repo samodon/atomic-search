@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -71,12 +72,12 @@ func tokenize(documents []document) []string {
 	return uniquewords
 }
 
-func createindex(words []string, documents []document) map[string]string {
-	invertedindex := make(map[string]string)
+func createindex(words []string, documents []document) map[string][]string {
+	invertedindex := make(map[string][]string)
 	for _, word := range words {
 		for _, document := range documents {
 			if contains(strings.Fields(document.content), word) {
-				invertedindex[word] = document.documentloc
+				invertedindex[word] = append(invertedindex[word], document.documentloc)
 			}
 		}
 	}
@@ -85,9 +86,16 @@ func createindex(words []string, documents []document) map[string]string {
 
 func main() {
 	directory := "."
+	reader := bufio.NewReader(os.Stdin)
 
 	documents := getdocuments(directory)
+
 	uniquewords := (tokenize(documents))
 	invertedindex := createindex(uniquewords, documents)
-	fmt.Print(invertedindex)
+	// fmt.Print(invertedindex)
+
+	fmt.Print("Enter search term:")
+	input, _ := reader.ReadString('\n')
+	input = strings.TrimSpace(input)
+	fmt.Println(invertedindex[input])
 }
