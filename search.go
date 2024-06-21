@@ -68,12 +68,26 @@ func tokenize(documents []document) []string {
 			}
 		}
 	}
-	return checkedwords
+	return uniquewords
+}
+
+func createindex(words []string, documents []document) map[string]string {
+	invertedindex := make(map[string]string)
+	for _, word := range words {
+		for _, document := range documents {
+			if contains(strings.Fields(document.content), word) {
+				invertedindex[word] = document.documentloc
+			}
+		}
+	}
+	return invertedindex
 }
 
 func main() {
 	directory := "."
 
 	documents := getdocuments(directory)
-	fmt.Print(tokenize(documents))
+	uniquewords := (tokenize(documents))
+	invertedindex := createindex(uniquewords, documents)
+	fmt.Print(invertedindex)
 }
