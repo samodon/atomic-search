@@ -15,6 +15,7 @@
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Operating Systems/Unix and Linux/Log Files.md"
  ],
  "OS": [
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Cybersecurity/3DES.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Cybersecurity/SHA-Checksums Usage.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Operating Systems/Open Source Licensing.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Operating Systems/Unix and Linux/Binary Files.md",
@@ -34,22 +35,35 @@
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Operating Systems/Unix and Linux/User Management.md"
  ],
  "ai": [
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Cybersecurity/3DES.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Data Science/Correlation Matrix.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Data Science/R-Squared Score.md"
  ],
  "computer_architecture": [
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Abstraction.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Cache Memory.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Clock Cycle.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Compiler.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Components of Computers.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Computer Screens.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Control Hazards.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Direct Mapping.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Dynamic Multiple Issue.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Frame Buffer.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Hierarchy of Memories.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Instruction Set Architecture.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Miss Penalty.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Miss Rate.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Moore's Law.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Page Swapping.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Program Counter.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Registers.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Spatial Locality.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Static Multiple Issue.md",
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Stored-Program Concept.md",
-  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Systems Software.md"
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Systems Software.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Temporal Locality.md",
+  "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Computer Architecture/Throughput.md"
  ],
  "cybersecurity": [
   "/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic/Cybersecurity/3DES.md",
