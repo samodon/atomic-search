@@ -3,6 +3,7 @@ package searching
 import (
 	"samodon/search/pkg"
 	"sort"
+	"strings"
 
 	"github.com/kljensen/snowball"
 	"github.com/kljensen/snowball/english"
@@ -66,11 +67,11 @@ func Getproximityscore(words []string, content []string) float32 {
 }
 
 func CalculateSearchScore(proximityScore float32, frequency int, weightProximity float32, weightFrequency float32, numoftags int, weightTag float32) float32 {
-	var normalizedProximity float32 = 0.0
-	if proximityScore > 0 {
-		normalizedProximity = 1.0 / proximityScore
-	}
-	searchScore := (weightProximity * normalizedProximity) + (weightFrequency * float32(frequency)) + float32(numoftags)*weightTag
+	// var normalizedProximity float32 = 0.0
+	// if proximityScore != 0 {
+	// 	normalizedProximity = 1.0 / proximityScore
+	// }
+	searchScore := (weightProximity * proximityScore) + (weightFrequency * float32(frequency)) + float32(numoftags)*weightTag
 	return searchScore
 }
 
@@ -91,4 +92,45 @@ func GetRankingByFrequency(terms []string, index map[string][]string) (map[strin
 	}
 
 	return ranking, keywords
+}
+
+// Stemmmed files
+
+func stemFiles(searchTerms []string) []string {
+	for _, term := range searchTerms {
+		term = english.Stem(term, true)
+		// fmt.Println(term)
+	}
+	return searchTerms
+}
+
+//export GetSearchRanking
+func GetSearchRanking(searchTerms string, mapdir string, tagdir string) []pkg.Ranking {
+	// fmt.Println(searchTerms)
+	termsarr := strings.Fields(searchTerms)
+	// fmt.Println(termsarr)
+	termsarr = stemFiles(termsarr)
+	contentIndex, _ := pkg.JSONToMap(mapdir)
+	tagindex, _ := pkg.JSONToMap(tagdir)
+	ranking, keywords := GetRankingByFrequency(termsarr, contentIndex)
+	results := pkg.ConvertMap(ranking)
+	for i := range results {
+		content, _, _ := pkg.ReadFile(results[i].NoteLocation)
+		strarr := strings.Fields(content)
+		results[i].Proximityscore = Getproximityscore(keywords, strarr)
+		// fmt.Println(results[i].searchscore)
+		tags := GetRankingbyTagInclusion(termsarr, tagindex, results[i].NoteLocation)
+		if tags != nil {
+			if len(tags) > 1 {
+				for _, tag := range tags {
+					results[i].Tags = append(results[i].Tags, tag)
+				}
+			} else {
+				results[i].Tags = append(results[i].Tags, tags[0])
+			}
+		}
+		results[i].Searchscore = float32(CalculateSearchScore(results[i].Proximityscore, results[i].Frequency, 0.6, 0.3, len(results[i].Tags), 0.1))
+	}
+
+	return SortBySearchScore(results)
 }

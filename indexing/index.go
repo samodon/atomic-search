@@ -3,6 +3,7 @@ package indexing
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"samodon/search/pkg"
@@ -39,7 +40,7 @@ func GetDocuments(dirname string) []pkg.Document {
 Writes out both indices as json
 */
 func Writeout(invertedindex map[string][]string, tagindex map[string][]string) {
-	file, err := os.Create("index/wordindex.json")
+	file, err := os.Create("/Users/samo/projects/search-go/index/wordindex.json")
 	if err != nil {
 		panic(err)
 	}
@@ -51,9 +52,9 @@ func Writeout(invertedindex map[string][]string, tagindex map[string][]string) {
 	if err != nil {
 		panic(err)
 	}
-	file, err = os.Create("index/tagindex.json")
+	file, err = os.Create("/Users/samo/projects/search-go/index/tagindex.json")
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 	defer file.Close()
 
@@ -68,7 +69,10 @@ func Writeout(invertedindex map[string][]string, tagindex map[string][]string) {
 /*
 Returns both invereted indices as hashmaps, requires []string, []string, []document
 */
-func CreateIndex(words []string, tags []string, documents []pkg.Document) (map[string][]string, map[string][]string) {
+//export CreateIndex
+func CreateIndex(directory string) /* (map[string][]string, map[string][]string)*/ {
+	documents := GetDocuments(directory)
+	words, tags := (pkg.Tokenize(documents))
 	wordindex := make(map[string][]string)
 	fmt.Printf("Indexing...")
 	for _, word := range words {
@@ -89,5 +93,6 @@ func CreateIndex(words []string, tags []string, documents []pkg.Document) (map[s
 			}
 		}
 	}
-	return wordindex, tagsindex
+	Writeout(wordindex, tagsindex)
+	// return wordindex, tagsindex
 }
