@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/user"
 	"path/filepath"
 	"samodon/search/indexing"
 	"samodon/search/pkg"
@@ -88,6 +89,11 @@ func DisplayNote(html string, langauge string, fileName string) {
 }
 
 func main() {
+	usr, err := user.Current()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	indexing.CreateIndex("/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic")
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: search <term>")
@@ -97,7 +103,7 @@ func main() {
 	searchTerm := strings.Join(termarr, " ")
 	searchTerm = pkg.RemoveWords(searchTerm)
 
-	sortedResults := searching.GetSearchRanking(searchTerm, "/Users/Samo/projects/search-go/index/wordindex.json", "/Users/Samo/projects/search-go/index/tagindex.json")
+	sortedResults := searching.GetSearchRanking(searchTerm, filepath.Join(usr.HomeDir, "/index/wordindex.json"), filepath.Join(usr.HomeDir, "/index/tagindex.json"))
 	if len(sortedResults) > 1 {
 		fileName := filepath.Base(sortedResults[0].NoteLocation)
 

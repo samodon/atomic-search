@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/user"
 	"path/filepath"
 	"samodon/search/pkg"
 	"strings"
@@ -40,7 +41,12 @@ func GetDocuments(dirname string) []pkg.Document {
 Writes out both indices as json
 */
 func Writeout(invertedindex map[string][]string, tagindex map[string][]string) {
-	file, err := os.Create("/Users/samo/projects/search-go/index/wordindex.json")
+	usr, err := user.Current()
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	file, err := os.Create(filepath.Join(usr.HomeDir, "/index/wordindex.json"))
 	if err != nil {
 		panic(err)
 	}
@@ -52,7 +58,7 @@ func Writeout(invertedindex map[string][]string, tagindex map[string][]string) {
 	if err != nil {
 		panic(err)
 	}
-	file, err = os.Create("/Users/samo/projects/search-go/index/tagindex.json")
+	file, err = os.Create(filepath.Join(usr.HomeDir, "/index/tagindex.json"))
 	if err != nil {
 		log.Panic(err)
 	}
