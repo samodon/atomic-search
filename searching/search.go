@@ -67,11 +67,11 @@ func Getproximityscore(words []string, content []string) float32 {
 }
 
 func CalculateSearchScore(proximityScore float32, frequency int, weightProximity float32, weightFrequency float32, numoftags int, weightTag float32) float32 {
-	// var normalizedProximity float32 = 0.0
-	// if proximityScore != 0 {
-	// 	normalizedProximity = 1.0 / proximityScore
-	// }
-	searchScore := (weightProximity * proximityScore) + (weightFrequency * float32(frequency)) + float32(numoftags)*weightTag
+	var normalizedProximity float32 = 0.0
+	if proximityScore != 0 {
+		normalizedProximity = 1.0 / proximityScore
+	}
+	searchScore := (weightProximity * normalizedProximity) + (weightFrequency * float32(frequency)) + float32(numoftags)*weightTag
 	return searchScore
 }
 
