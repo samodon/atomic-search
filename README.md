@@ -14,7 +14,11 @@ I have recently become interested in Personal Knowledge Systems, specifically th
 
 ## Atomic Search in Use
 
-> [!todo] Insert Pictures
+https://github.com/samodon/atomic-search/assets/77257036/0a7b7b5f-a276-4c01-af9d-c1777c9d4718
+
+<img width="1470" alt="Screenshot 2024-06-28 at 3 25 58 PM" src="https://github.com/samodon/atomic-search/assets/77257036/7ca1f216-cfe3-413d-841d-efe08a4a97a3">
+
+<img width="1470" alt="Screenshot 2024-06-28 at 4 09 58 PM" src="https://github.com/samodon/atomic-search/assets/77257036/97dbb399-7028-4472-a3c6-bcf57d5f163f">
 
 ## Installation
 To begin using this project here are the steps to install and begin using:
