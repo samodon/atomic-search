@@ -46,7 +46,7 @@ This will build the binary that runs the software.
 5. **Add the executable to your PATH**(Optional)
 ```sh
 export PATH="$PATH:/usr/local/go/bin
-cd <path_to_executable> /usr/local/go/bin
+cp <path_to_executable> /usr/local/go/bin
 ```
 Note: The paths might be different depending on your install of GO. Verify the path to you GO installation before adding to path.
 ## Usage
