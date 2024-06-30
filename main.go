@@ -11,6 +11,7 @@ import (
 	"samodon/search/pkg"
 	"samodon/search/searching"
 	"strings"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/alecthomas/chroma/v2/quick"
@@ -88,18 +89,56 @@ func DisplayNote(html string, langauge string, fileName string) {
 	}
 }
 
+func SaveFilePath(filePath, configFile string) error {
+	return os.WriteFile(configFile, []byte(filePath), 0644)
+}
+
+// LoadFilePath loads the file path from a text file.
+func LoadFilePath(configFile string) string {
+	data, err := os.ReadFile(configFile)
+	if err != nil {
+		fmt.Println("Make sure you have added the correct vault path with --path <vaultpath>")
+		fmt.Println(err)
+	}
+	return strings.TrimSpace(string(data))
+}
+
 func main() {
 	usr, err := user.Current()
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
 	}
-	indexing.CreateIndex("/Users/samo/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian Vaults/Projects/Notes/Atomic")
+
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: search <term>")
 		return
 	}
 	termarr := os.Args[1:]
+	indexpath := filepath.Join(usr.HomeDir, "/index/wordindex.json")
+	fileInfo, _ := os.Stat(indexpath)
+
+	timedifference := time.Now().Sub(fileInfo.ModTime())
+	if os.Args[1] == "--path" {
+		path := os.Args[2]
+		fmt.Println(path)
+		err := SaveFilePath(os.Args[2], filepath.Join(usr.HomeDir, "/index/config.txt"))
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		return
+	}
+	vaultPath := LoadFilePath(filepath.Join(usr.HomeDir, "/index/config.txt"))
+	if timedifference.Hours() > 24 {
+		indexing.CreateIndex(vaultPath)
+	}
+
+	if os.Args[1] == "--index" {
+		indexing.CreateIndex(vaultPath)
+		return
+	}
+
 	searchTerm := strings.Join(termarr, " ")
 	searchTerm = pkg.RemoveWords(searchTerm)
 

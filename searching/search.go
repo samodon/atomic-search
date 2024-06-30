@@ -1,6 +1,7 @@
 package searching
 
 import (
+	"path/filepath"
 	"samodon/search/pkg"
 	"sort"
 	"strings"
@@ -66,12 +67,12 @@ func Getproximityscore(words []string, content []string) float32 {
 	return float32(totalDistance) / float32(len(distances))
 }
 
-func CalculateSearchScore(proximityScore float32, frequency int, weightProximity float32, weightFrequency float32, numoftags int, weightTag float32) float32 {
+func CalculateSearchScore(proximityScore float32, frequency int, weightProximity float32, weightFrequency float32, numoftags int, weightTag float32, fileNameRatio float32, weightRatio float32) float32 {
 	var normalizedProximity float32 = 0.0
 	if proximityScore != 0 {
 		normalizedProximity = 1.0 / proximityScore
 	}
-	searchScore := (weightProximity * normalizedProximity) + (weightFrequency * float32(frequency)) + float32(numoftags)*weightTag
+	searchScore := (weightProximity * normalizedProximity) + (weightFrequency * float32(frequency)) + float32(numoftags)*weightTag + fileNameRatio*weightRatio
 	return searchScore
 }
 
@@ -92,6 +93,26 @@ func GetRankingByFrequency(terms []string, index map[string][]string) (map[strin
 	}
 
 	return ranking, keywords
+}
+
+func getFileNameRatio(terms []string, path string) float32 {
+	_, fileName := filepath.Split(path)
+	fileName = strings.ReplaceAll(fileName, ".md", "")
+	namearr := strings.Fields(strings.ToLower(fileName))
+	var ratio float32
+	count := 0
+	for _, word := range terms {
+		for _, nameWord := range namearr {
+			if word == nameWord {
+				count++
+			}
+		}
+	}
+	if count == 0 {
+		return 0
+	}
+	ratio = (float32(count)) / float32(len(namearr))
+	return ratio
 }
 
 // Stemmmed files
@@ -120,6 +141,7 @@ func GetSearchRanking(searchTerms string, mapdir string, tagdir string) []pkg.Ra
 		results[i].Proximityscore = Getproximityscore(keywords, strarr)
 		// fmt.Println(results[i].searchscore)
 		tags := GetRankingbyTagInclusion(termsarr, tagindex, results[i].NoteLocation)
+		results[i].FileNameRatio = getFileNameRatio(termsarr, results[i].NoteLocation)
 		if tags != nil {
 			if len(tags) > 1 {
 				for _, tag := range tags {
@@ -129,7 +151,7 @@ func GetSearchRanking(searchTerms string, mapdir string, tagdir string) []pkg.Ra
 				results[i].Tags = append(results[i].Tags, tags[0])
 			}
 		}
-		results[i].Searchscore = float32(CalculateSearchScore(results[i].Proximityscore, results[i].Frequency, 0.6, 0.3, len(results[i].Tags), 0.1))
+		results[i].Searchscore = float32(CalculateSearchScore(results[i].Proximityscore, results[i].Frequency, 0.5, 0.2, len(results[i].Tags), 0.1, results[i].FileNameRatio, 0.3))
 	}
 
 	return SortBySearchScore(results)

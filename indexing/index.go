@@ -46,6 +46,7 @@ func Writeout(invertedindex map[string][]string, tagindex map[string][]string) {
 		fmt.Println("Error:", err)
 		return
 	}
+	os.Mkdir(filepath.Join(usr.HomeDir, "/index/"), os.FileMode(0755))
 	file, err := os.Create(filepath.Join(usr.HomeDir, "/index/wordindex.json"))
 	if err != nil {
 		panic(err)

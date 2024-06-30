@@ -9,4 +9,5 @@ type Ranking struct {
 	Keywords       []string
 	Searchscore    float32
 	Tags           []string
+	FileNameRatio  float32
 }

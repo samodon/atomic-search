@@ -169,7 +169,7 @@ func Contains(slice []string, item string) bool {
 func ConvertMap(m map[string]int) []Ranking {
 	var kvSlice []Ranking
 	for k, v := range m {
-		kvSlice = append(kvSlice, Ranking{k, v, 0, nil, 0, nil})
+		kvSlice = append(kvSlice, Ranking{k, v, 0, nil, 0, nil, 0})
 	}
 	// TODO:
 	// - [] sort by overall score in the end

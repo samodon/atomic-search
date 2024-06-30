@@ -51,6 +51,11 @@ cd <path_to_executable> /usr/local/go/bin
 Note: The paths might be different depending on your install of GO. Verify the path to you GO installation before adding to path.
 ## Usage
 
+Select the path to your vault of notes:
+```sh
+search --path <your vault path>
+```
+
 To use this tool you are only required to run one command:
 ```sh
 search <your search term>
@@ -59,6 +64,11 @@ search <your search term>
 If the application isn't in your path environment variable then usage is as follows:
 ```sh
 ./search <your search term>
+```
+
+Index updates every 24 hours, to manually force an update run the command:
+```sh
+search --index
 ```
 
 
