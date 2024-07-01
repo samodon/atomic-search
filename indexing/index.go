@@ -81,7 +81,7 @@ func CreateIndex(directory string) /* (map[string][]string, map[string][]string)
 	documents := GetDocuments(directory)
 	words, tags := (pkg.Tokenize(documents))
 	wordindex := make(map[string][]string)
-	fmt.Printf("Indexing...")
+	fmt.Println("Indexing...")
 	for _, word := range words {
 		for _, document := range documents {
 			if pkg.Contains(strings.Fields(document.Content), word) {

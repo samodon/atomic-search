@@ -151,7 +151,7 @@ func GetSearchRanking(searchTerms string, mapdir string, tagdir string) []pkg.Ra
 				results[i].Tags = append(results[i].Tags, tags[0])
 			}
 		}
-		results[i].Searchscore = float32(CalculateSearchScore(results[i].Proximityscore, results[i].Frequency, 0.5, 0.2, len(results[i].Tags), 0.1, results[i].FileNameRatio, 0.3))
+		results[i].Searchscore = float32(CalculateSearchScore(results[i].Proximityscore, results[i].Frequency, 0.3, 0.3, len(results[i].Tags), 0.1, results[i].FileNameRatio, 0.1))
 	}
 
 	return SortBySearchScore(results)

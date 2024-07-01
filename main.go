@@ -19,21 +19,6 @@ import (
 	"github.com/rivo/tview"
 )
 
-type resultWriter struct {
-	result *string
-}
-
-func (rw *resultWriter) Write(p []byte) (n int, err error) {
-	*rw.result += string(p)
-	return len(p), nil
-}
-
-type Note struct {
-	heading string
-	content string
-	code    string
-}
-
 // DisplayNote processes and displays the note with syntax highlighting for code blocks using tview.
 func DisplayNote(html string, langauge string, fileName string) {
 	doc, err := goquery.NewDocumentFromReader(strings.NewReader(html))
@@ -120,8 +105,6 @@ func main() {
 
 	timedifference := time.Now().Sub(fileInfo.ModTime())
 	if os.Args[1] == "--path" {
-		path := os.Args[2]
-		fmt.Println(path)
 		err := SaveFilePath(os.Args[2], filepath.Join(usr.HomeDir, "/index/config.txt"))
 		if err != nil {
 			fmt.Println(err)
