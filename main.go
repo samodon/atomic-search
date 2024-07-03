@@ -1,6 +1,5 @@
 package main
 
-import "C"
 import (
 	"fmt"
 	"log"
@@ -25,7 +24,6 @@ func DisplayNote(html string, langauge string, fileName string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	// Initialize tview components
 	app := tview.NewApplication()
 	textView := tview.NewTextView().SetTextAlign(tview.AlignLeft).SetDynamicColors(true)
@@ -112,6 +110,7 @@ func main() {
 
 		return
 	}
+
 	vaultPath := LoadFilePath(filepath.Join(usr.HomeDir, "/index/config.txt"))
 	if timedifference.Hours() > 24 {
 		indexing.CreateIndex(vaultPath)
@@ -126,7 +125,7 @@ func main() {
 	searchTerm = pkg.RemoveWords(searchTerm)
 
 	sortedResults := searching.GetSearchRanking(searchTerm, filepath.Join(usr.HomeDir, "/index/wordindex.json"), filepath.Join(usr.HomeDir, "/index/tagindex.json"))
-	if len(sortedResults) > 1 {
+	if len(sortedResults) > 0 {
 		fileName := filepath.Base(sortedResults[0].NoteLocation)
 
 		content, tags, _ := (pkg.ParseMdData(sortedResults[0].NoteLocation))
